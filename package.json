@@ -1,0 +1,33 @@
+{
+  "name": "reactassignment",
+  "version": "1.0.0",
+  "description": "This is namste react by Dhara",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dhara1611/ReactAssignments.git"
+  },
+  "keywords": [
+    "React",
+    "Redux"
+  ],
+  "author": "Dhara Vakhare",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dhara1611/ReactAssignments/issues"
+  },
+  "homepage": "https://github.com/dhara1611/ReactAssignments#readme",
+  "devDependencies": {
+    "parcel": "^2.9.2",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }, 
+  "browserslist": [
+    "last 2 version"
+  ]
+}

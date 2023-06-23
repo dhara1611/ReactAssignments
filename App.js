@@ -1,3 +1,5 @@
+import React from "react";
+import ReactDOM from "react-dom/client";
 //  using React render element
 
 //root.render replace not append inside root element and passdata from root.render method

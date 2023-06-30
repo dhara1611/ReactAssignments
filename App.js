@@ -1,6 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
+
+
+
+
 // Nested header element using React.createElement
 
 // React.createElement = javascript object = render into html
@@ -25,17 +29,29 @@ const TitleComponent = () =>{
     return <h2>Component Composition</h2>
 }
 const Headingcomponent = () =>{
-    return <div className="container">
-        <h1>Heading 1</h1> 
-        {TitleComponent()}
-        {<TitleComponent/>}
-
+    return <div className="container"> 
+        {jsxheading} {/*element rendering*/}
+        {<TitleComponent/>} {/*component render*/}
         {<TitleComponent></TitleComponent>}
 
     </div>
 };
 
+const Header = ()=>{
+    return <div>
+            <div className="header">
+                <img src="https://www.templateupdates.com/wp-content/uploads/2018/10/Fast-Food-Logo-Design-Template.jpg" className="logo"/>
+                <div className="searchbox">
+                    <input type="text"/><button>search</button>
+                </div>
+                <img src="https://png.pngtree.com/png-vector/20190307/ourmid/pngtree-vector-add-user-icon-png-image_762930.jpg" className="usericon"/>
+            </div>
+            <Headingcomponent/>
+            </div>
+    
+}
+
 
 const root= ReactDOM.createRoot(document.getElementById("root"))
 //root.render(jsxheading); render react element
-root.render(<Headingcomponent/>);  //render functional component
+root.render(<Header/>);  //render functional component

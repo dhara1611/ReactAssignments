@@ -1,15 +1,44 @@
-#heading {
-    color: blue;
-}
 .header{
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
-    align-items: baseline;
 }
-.logo{
+.logo img{
     width: 180px;
+}
+.nav-items > ul{
+    display: flex;
+    margin-right: 30px;
+
+}
+.nav-items > ul > li{
+    padding: 10px;
+    margin: 10px;
+    list-style-type: none;
+    font-size: 18px;
 }
 .usericon{
     width: 60px;
+}
+.restcontainer{
+    display: flex;
+    flex-wrap: wrap;
+}
+.restcard{
+    width: 200px;
+    height: auto;
+    padding: 5px;
+    border: 1px solid #0000;
+    margin: 10px;
+}
+.restcard:hover{
+    cursor: pointer;
+    border: 1px solid #000;
+}
+.restlogo img{
+    width: 100%;
+}
+.filterBar{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
 }

@@ -22,3 +22,30 @@ React is library we can use any time and anywhere in our project
 - HTTPS 
 - Tree Shaking - remove unused code 
 - different dev and prod bundles
+
+
+Food App wireframe
+// Header
+// - Logo
+// - Navitems
+// Body
+// - Search
+// - ResturantConatiner
+// -- ResturantCard
+// Footer
+// -copyrights
+// -footerLinks
+
+
+
+Two types of import export
+
+<!-- default Export /import -->
+ default export  component;
+ import component from "path";
+
+ <!-- named export / import -->
+ export const component/variable;
+ import {component/variable} from "path";
+
+

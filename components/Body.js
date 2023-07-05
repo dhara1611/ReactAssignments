@@ -5,89 +5,56 @@ import { useState } from "react";
 const Body = () => {
   // state variable = super powerful variable
   const [listOfResturant, setlistOfResturant] = useState(restList);
-
-  // normal js variable
-  let listOfResturant2 = [
-    {
-      data: {
-        id: "333573",
-        name: "macD",
-        totalRatingsString: "5000+ ratings",
-        cloudinaryImageId: "zh3pxwfzbvkovh3j7pg4",
-        cuisines: [
-          "Chinese",
-          "Thai",
-          "Seafood",
-          "Asian",
-          "Healthy Food",
-          "Beverages",
-        ],
-        costForTwo: 35000,
-        costForTwoString: "₹350 FOR TWO",
-        deliveryTime: 29,
-        avgRating: "3.9",
-      },
-    },
-    {
-      data: {
-        id: "333574",
-        name: "kfc",
-        totalRatingsString: "5000+ ratings",
-        cloudinaryImageId: "zh3pxwfzbvkovh3j7pg4",
-        cuisines: [
-          "Chinese",
-          "Thai",
-          "Seafood",
-          "Asian",
-          "Healthy Food",
-          "Beverages",
-        ],
-        costForTwo: 35000,
-        costForTwoString: "₹350 FOR TWO",
-        deliveryTime: 29,
-        avgRating: "4.2",
-      },
-    },
-    {
-      data: {
-        id: "333575",
-        name: "Chopstick",
-        totalRatingsString: "5000+ ratings",
-        cloudinaryImageId: "zh3pxwfzbvkovh3j7pg4",
-        cuisines: [
-          "Chinese",
-          "Thai",
-          "Seafood",
-          "Asian",
-          "Healthy Food",
-          "Beverages",
-        ],
-        costForTwo: 35000,
-        costForTwoString: "₹350 FOR TWO",
-        deliveryTime: 29,
-        avgRating: "4.5",
-      },
-    },
-  ];
+  const [searchInput, setSearchInput] = useState("");
 
   return (
     <div className="body">
       <div className="filterBar">
         <div className="search">
-          <input className="search-btn"></input>
-          <button>search</button>
+          <input
+            type="text"
+            className="search-btn"
+            placeholder="search..."
+            value={searchInput}
+            onChange={(e) => {
+              setSearchInput(e.target.value);
+              if (searchInput.length > 1) {
+                const filteredList = restList.filter((res) =>
+                  res.data.name
+                    .toLowerCase()
+                    .includes(searchInput.toLowerCase())
+                );
+                console.log(filteredList);
+                setlistOfResturant(filteredList);
+              } else {
+                setlistOfResturant(restList);
+              }
+            }}
+          />
+          <button
+            onClick={() => {
+              const filteredList = restList.filter((res) =>
+                res.data.name.toLowerCase().includes(searchInput.toLowerCase())
+              );
+              setlistOfResturant(filteredList);
+
+              if (searchInput === "") {
+                setlistOfResturant(restList);
+              }
+            }}
+          >
+            search
+          </button>
         </div>
         <div className="filter">
-          
           <button
             className="filter-btn"
             onClick={() => {
-              setlistOfResturant(filteredList = listOfResturant.filter(
-                (res) => res.data.avgRating > 4
-              ));
-
-              
-            
+              setlistOfResturant(
+                (filteredList = listOfResturant.filter(
+                  (res) => res.data.avgRating > 4
+                ))
+              );
             }}
           >
             Top Rated Restaurant

@@ -1,13 +1,32 @@
 import RestCard from "./RestCard";
-import restList from "../utils/mockdata";
-import { useState } from "react";
+import ShimmerUi from "./ShimmerUi";
+import { useEffect, useState } from "react";
 
 const Body = () => {
   // state variable = super powerful variable
-  const [listOfResturant, setlistOfResturant] = useState(restList);
+  const [listOfResturant, setlistOfResturant] = useState([]);
+  const [filterdResturant, setfilterdResturant] = useState([]);
   const [searchInput, setSearchInput] = useState("");
 
-  return (
+  useEffect(() => {
+    fetchData();
+    console.log("useEffect render")
+  }, []);
+
+  const fetchData = async () => {
+    const data = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&page_type=DESKTOP_WEB_LISTING"
+    );
+    const json = await data.json();
+    // optional chaining
+
+    setlistOfResturant(json?.data?.cards[2]?.data?.data?.cards);
+    setfilterdResturant(json?.data?.cards[2]?.data?.data?.cards);
+  };
+
+  return listOfResturant.length === 0 ? (
+    <ShimmerUi />
+  ) : (
     <div className="body">
       <div className="filterBar">
         <div className="search">
@@ -16,31 +35,18 @@ const Body = () => {
             className="search-btn"
             placeholder="search..."
             value={searchInput}
-            onChange={(e) => {
-              setSearchInput(e.target.value);
-              if (searchInput.length > 1) {
-                const filteredList = restList.filter((res) =>
-                  res.data.name
-                    .toLowerCase()
-                    .includes(searchInput.toLowerCase())
-                );
-                console.log(filteredList);
-                setlistOfResturant(filteredList);
-              } else {
-                setlistOfResturant(restList);
-              }
+            onChange={(event) => {
+              setSearchInput(event.target.value);
             }}
           />
           <button
             onClick={() => {
-              const filteredList = restList.filter((res) =>
-                res.data.name.toLowerCase().includes(searchInput.toLowerCase())
+              console.log(searchInput);
+              const filterdResturant = listOfResturant.filter(
+                (res) => res.data.name.toLowerCase().includes(searchInput.toLowerCase())
               );
-              setlistOfResturant(filteredList);
 
-              if (searchInput === "") {
-                setlistOfResturant(restList);
-              }
+              setfilterdResturant(filterdResturant);
             }}
           >
             search
@@ -50,11 +56,10 @@ const Body = () => {
           <button
             className="filter-btn"
             onClick={() => {
-              setlistOfResturant(
-                (filteredList = listOfResturant.filter(
-                  (res) => res.data.avgRating > 4
-                ))
+              const filteredList = filterdResturant.filter(
+                (res) => res.data.avgRating > 4
               );
+              setfilterdResturant(filteredList);
             }}
           >
             Top Rated Restaurant
@@ -62,9 +67,10 @@ const Body = () => {
         </div>
       </div>
       <div className="restcontainer">
-        {listOfResturant.map((restaurant) => (
+        {filterdResturant.map((restaurant) => (
           <RestCard key={restaurant.data.id} restData={restaurant} />
         ))}
+        {console.log("Body render")}
       </div>
     </div>
   );

@@ -42,3 +42,22 @@
     justify-content: space-between;
     padding: 10px;
 }
+.shimmerContainer{
+    display: flex;
+    flex-wrap: wrap;
+}
+.shimmerbox{
+    width: 200px;
+    height: 300px;
+    padding: 5px;
+    border: 1px solid #0000;
+    margin: 10px;
+    background-color: #f0f0f0;
+}
+.login{
+    padding: 0px 20px;
+    cursor: pointer;
+}
+.filter-btn,.search-btn{
+    cursor: pointer;
+}

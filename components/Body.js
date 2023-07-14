@@ -10,7 +10,7 @@ const Body = () => {
 
   useEffect(() => {
     fetchData();
-    console.log("useEffect render")
+    console.log("useEffect render");
   }, []);
 
   const fetchData = async () => {
@@ -42,10 +42,10 @@ const Body = () => {
           <button
             onClick={() => {
               console.log(searchInput);
-              const filterdResturant = listOfResturant.filter(
-                (res) => res.data.name.toLowerCase().includes(searchInput.toLowerCase())
-              );
 
+              const filterdResturant = listOfResturant.filter((res) =>
+                res.data.name.toLowerCase().includes(searchInput.toLowerCase())
+              );
               setfilterdResturant(filterdResturant);
             }}
           >
@@ -67,9 +67,13 @@ const Body = () => {
         </div>
       </div>
       <div className="restcontainer">
-        {filterdResturant.map((restaurant) => (
-          <RestCard key={restaurant.data.id} restData={restaurant} />
-        ))}
+        {filterdResturant.length === 0 ? (
+          <h1 className="">search Item is not exsist in Our List! Please Try our recommanded Item.. Thank you for search </h1>
+        ) : (
+          filterdResturant.map((restaurant) => (
+            <RestCard key={restaurant.data.id} restData={restaurant} />
+          ))
+        )}
         {console.log("Body render")}
       </div>
     </div>

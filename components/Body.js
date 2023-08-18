@@ -8,6 +8,8 @@ const Body = () => {
   const [filterdResturant, setfilterdResturant] = useState([]);
   const [searchInput, setSearchInput] = useState("");
 
+  console.log("Body render");
+
   useEffect(() => {
     fetchData();
     console.log("useEffect render");
@@ -20,14 +22,17 @@ const Body = () => {
     const json = await data.json();
     // optional chaining
 
-    setlistOfResturant(json?.data?.cards[2]?.data?.data?.cards);
-    setfilterdResturant(json?.data?.cards[2]?.data?.data?.cards);
+    setlistOfResturant(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    setfilterdResturant(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    // setfilterdResturant(json?.data?.cards[2]?.data?.data?.cards);
+    console.log(json)
   };
 
   return listOfResturant.length === 0 ? (
     <ShimmerUi />
   ) : (
     <div className="body">
+      {console.log("Body render 82")}
       <div className="filterBar">
         <div className="search">
           <input
@@ -42,9 +47,8 @@ const Body = () => {
           <button
             onClick={() => {
               console.log(searchInput);
-
               const filterdResturant = listOfResturant.filter((res) =>
-                res.data.name.toLowerCase().includes(searchInput.toLowerCase())
+                res.info.name.toLowerCase().includes(searchInput.toLowerCase())
               );
               setfilterdResturant(filterdResturant);
             }}
@@ -57,7 +61,7 @@ const Body = () => {
             className="filter-btn"
             onClick={() => {
               const filteredList = filterdResturant.filter(
-                (res) => res.data.avgRating > 4
+                (res) => res.info.avgRating > 4
               );
               setfilterdResturant(filteredList);
             }}
@@ -68,10 +72,13 @@ const Body = () => {
       </div>
       <div className="restcontainer">
         {filterdResturant.length === 0 ? (
-          <h1 className="">search Item is not exsist in Our List! Please Try our recommanded Item.. Thank you for search </h1>
+          <h1 className="">
+            search Item is not exsist in Our List! Please Try our recommanded
+            Item.. Thank you for search{" "}
+          </h1>
         ) : (
           filterdResturant.map((restaurant) => (
-            <RestCard key={restaurant.data.id} restData={restaurant} />
+            <RestCard key={restaurant?.info.id} restData={restaurant?.info} />
           ))
         )}
         {console.log("Body render")}
